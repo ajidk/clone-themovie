@@ -68,8 +68,6 @@ export const getCountry = createAsyncThunk(
   }
 );
 
-const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
-
 export const getGenres = createAsyncThunk(
   "movie/genres",
   async (_, { rejectWithValue }) => {

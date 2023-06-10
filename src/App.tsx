@@ -9,9 +9,7 @@ function App() {
   const [count, setCount] = useState(0);
   const dispatch = useAppDispatch();
 
-  const { isLoading, error, data } = useQuery("testing dulu", () =>
-    dispatch(getPopularMovie())
-  );
+  const { data } = useQuery("testing dulu", () => dispatch(getPopularMovie()));
   console.log(data);
 
   return (

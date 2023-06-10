@@ -1,17 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
-// import { UsersState } from "../../utils/interface/jadwal";
-import { getCountry, getPopularMovie, getProviderMovie } from "./action";
+import {
+  getCountry,
+  getGenres,
+  getLanguages,
+  getPopularMovie,
+  getProviderMovie,
+} from "./action";
 
 const initialState = {
   popular: [],
   loading: false,
   providers: null,
   countries: null,
+  genres: null,
+  languages: null,
 } as any;
 
 const movieSlice = createSlice({
-  name: "solat",
+  name: "movie",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -34,6 +41,20 @@ const movieSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getCountry.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getGenres.fulfilled, (state, action) => {
+      state.genres = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getGenres.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getLanguages.fulfilled, (state, action) => {
+      state.languages = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getLanguages.pending, (state) => {
       state.loading = true;
     });
   },

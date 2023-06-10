@@ -78,7 +78,27 @@ export const getGenres = createAsyncThunk(
       if (res.status != 200) {
         throw new Error(messages);
       }
-      console.log(res.data);
+      // return console.log(res.data.genres);
+
+      return res.data.genres;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);
+
+export const getLanguages = createAsyncThunk(
+  "movie/languages",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res: any = await connection.get(`configuration/languages`);
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+      // return console.log(res.data);
 
       return res.data;
     } catch (e: any) {

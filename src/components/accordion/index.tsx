@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface AccordionProps {
   title: string;
@@ -10,8 +10,12 @@ const Accordion: React.FC<AccordionProps> = ({ title, content, status }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
-    status === true ? setIsOpen(!isOpen) : setIsOpen(!isOpen);
+    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    status === true && setIsOpen(true);
+  }, [status]);
 
   return (
     <div className="border rounded-md mb-4 overflow-auto">

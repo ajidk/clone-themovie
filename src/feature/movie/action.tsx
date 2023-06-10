@@ -46,8 +46,6 @@ export const getProviderMovie = createAsyncThunk(
   }
 );
 
-`https://api.themoviedb.org/3/configuration/countries?language=en-US`;
-
 export const getCountry = createAsyncThunk(
   "movie/countries",
   async (_, { rejectWithValue }) => {
@@ -61,6 +59,28 @@ export const getCountry = createAsyncThunk(
         throw new Error(messages);
       }
       // console.log(res.data);
+
+      return res.data;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);
+
+const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+
+export const getGenres = createAsyncThunk(
+  "movie/genres",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res: any = await connection.get(`genre/movie/list?language=en`);
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+      console.log(res.data);
 
       return res.data;
     } catch (e: any) {

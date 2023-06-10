@@ -104,6 +104,7 @@ const Popular = () => {
               />
               <Accordion
                 title="Filters"
+                status={true}
                 content={
                   <main className="flex flex-col">
                     <section>
@@ -177,10 +178,18 @@ const Popular = () => {
                         </label>
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                        from : <input type="date" className="px-2 py-1 rounded-lg flex items-center"  />
+                        from :{" "}
+                        <input
+                          type="date"
+                          className="px-2 py-1 rounded-lg flex items-center"
+                        />
                       </div>
                       <div className="flex justify-between items-center">
-                        to : <input type="date" className="px-2 py-1 rounded-lg flex items-center"  />
+                        to :{" "}
+                        <input
+                          type="date"
+                          className="px-2 py-1 rounded-lg flex items-center"
+                        />
                       </div>
                     </section>
                   </main>

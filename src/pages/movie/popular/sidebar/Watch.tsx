@@ -23,10 +23,6 @@ const Watch = () => {
           {countries?.map((item: { english_name: string }, idx: string) => (
             <option key={`country-${idx}`}>{item.english_name}</option>
           ))}
-          <option>Harry Potter</option>
-          <option>Lord of the Rings</option>
-          <option>Planet of the Apes</option>
-          <option>Star Trek</option>
         </select>
       </div>
       <div className="grid grid-cols-4 gap-3 items-center mt-4 overflow-scroll">

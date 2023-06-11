@@ -107,3 +107,22 @@ export const getLanguages = createAsyncThunk(
     }
   }
 );
+
+export const getDetailMovie = createAsyncThunk<string, { movie_id: string }>(
+  "movie/detail-movie",
+  async ({ movie_id }, { rejectWithValue }) => {
+    try {
+      const res: any = await connection.get(`movie/${movie_id}?language=en-US`);
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+
+      return res.data;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);

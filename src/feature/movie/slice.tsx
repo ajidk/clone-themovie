@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getCountry,
+  getDetailMovie,
   getGenres,
   getLanguages,
   getPopularMovie,
@@ -15,6 +16,7 @@ const initialState = {
   countries: null,
   genres: null,
   languages: null,
+  detailMovie: null,
 } as any;
 
 const movieSlice = createSlice({
@@ -55,6 +57,13 @@ const movieSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getLanguages.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getDetailMovie.fulfilled, (state, action) => {
+      state.detailMovie = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getDetailMovie.pending, (state) => {
       state.loading = true;
     });
   },

@@ -72,14 +72,14 @@ const Filter = () => {
           from :{" "}
           <input
             type="date"
-            className="px-2 py-1 rounded-lg flex items-center"
+            className="px-2 py-1 rounded-lg flex items-center border"
           />
         </div>
         <div className="flex justify-between items-center">
           to :{" "}
           <input
             type="date"
-            className="px-2 py-1 rounded-lg flex items-center"
+            className="px-2 py-1 rounded-lg flex items-center border"
           />
         </div>
       </section>

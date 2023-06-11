@@ -1,16 +1,12 @@
-import React, { CSSProperties } from "react";
+import React from "react";
+import ProgressCircle from "./ProgressCircle";
 
 export interface cardMovieState {
+  id?: string;
   poster_path: string;
   title: string;
   release_date: string;
   vote_average: string;
-}
-
-interface CustomCSSProperties extends CSSProperties {
-  "--value"?: string;
-  "--size"?: string;
-  "--thickness"?: string;
 }
 
 const CardMovie: React.FC<cardMovieState> = ({
@@ -19,11 +15,6 @@ const CardMovie: React.FC<cardMovieState> = ({
   release_date,
   vote_average,
 }) => {
-  const customStyles: CustomCSSProperties = {
-    "--value": vote_average.replace(".", ""),
-    "--size": "12rem",
-    "--thickness": "2px",
-  };
   return (
     <div className="rounded-lg  bg-white drop-shadow relative">
       <img
@@ -36,14 +27,7 @@ const CardMovie: React.FC<cardMovieState> = ({
         <div className="font-light">{release_date}</div>
       </div>
 
-      <div
-        className="radial-progress text-green-500 flex flex-row items-center bg-black w-14 h-14 absolute bottom-16 left-4"
-        style={customStyles}
-      >
-        <div className="text-white flex justify-start items-start">
-          {vote_average.replace(".", "")} <span className="text-[8px]">%</span>
-        </div>
-      </div>
+      <ProgressCircle vote_average={vote_average} className='absolute bottom-16 left-4 h-12 w-12' />
     </div>
   );
 };

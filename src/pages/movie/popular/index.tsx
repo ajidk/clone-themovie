@@ -10,6 +10,7 @@ import {
   getProviderMovie,
 } from "../../../feature/movie/action";
 import Sidebar from "./sidebar";
+import { Link } from "react-router-dom";
 
 const Popular = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ const Popular = () => {
   useQuery("country", () => dispatch(getCountry()));
   useQuery("genres", () => dispatch(getGenres()));
   useQuery("languages", () => dispatch(getLanguages()));
+
+
 
   return (
     <main className="container mx-auto h-screen">
@@ -40,13 +43,17 @@ const Popular = () => {
           <div>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-start mt-8 px-4 overscroll-auto">
               {popular?.results?.map((item: cardMovieState, idx: string) => (
-                <CardMovie
+                <Link
                   key={`popular-${idx}`}
-                  poster_path={item.poster_path}
-                  title={item.title}
-                  release_date={item.release_date}
-                  vote_average={String(item.vote_average)}
-                />
+                  to={`/${item.id}-${item.title.replaceAll(" ", "-")}`}
+                >
+                  <CardMovie
+                    poster_path={item.poster_path}
+                    title={item.title}
+                    release_date={item.release_date}
+                    vote_average={String(item.vote_average)}
+                  />
+                </Link>
               ))}
             </div>
           </div>

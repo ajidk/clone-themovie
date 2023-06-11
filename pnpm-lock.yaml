@@ -15,9 +15,11 @@ specifiers:
   eslint-plugin-react-refresh: ^0.3.4
   localforage: ^1.10.0
   match-sorter: ^6.3.1
+  moment: ^2.29.4
   postcss: ^8.4.24
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-icons: ^4.9.0
   react-query: ^3.39.3
   react-redux: ^8.0.7
   react-router-dom: ^6.12.1
@@ -31,8 +33,10 @@ dependencies:
   axios: 1.4.0
   localforage: 1.10.0
   match-sorter: 6.3.1
+  moment: 2.29.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-icons: 4.9.0_react@18.2.0
   react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
   react-redux: 8.0.7_nwi3xlk233aiuojbhb7nbpwlty
   react-router-dom: 6.12.1_biqbaboplfbrettd7655fr4n2y
@@ -1723,6 +1727,10 @@ packages:
     dependencies:
       brace-expansion: 1.1.11
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: false
+
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -1964,6 +1972,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-icons/4.9.0_react@18.2.0:
+    resolution: {integrity: sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

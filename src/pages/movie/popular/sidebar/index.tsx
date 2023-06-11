@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Accordion } from "../../../../components";
 import Filter from "./Filter";
 import Sort from "./Sort";
@@ -21,7 +22,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div>
+    <Fragment>
       {sidebarConfig.map((item, idx) => (
         <Accordion
           key={`sidebar-${idx}`}
@@ -30,7 +31,7 @@ const Sidebar = () => {
           status={item.status}
         />
       ))}
-    </div>
+    </Fragment>
   );
 };
 

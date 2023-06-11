@@ -16,18 +16,21 @@ const CardMovie: React.FC<cardMovieState> = ({
   vote_average,
 }) => {
   return (
-    <div className="rounded-lg  bg-white drop-shadow relative">
+    <div className="relative top-0 left-0 flex flex-wrap items-start border border-[#e3e3e3] overflow-hidden max-w-[200px] mt-30 rounded-lg">
       <img
         src={`https://image.tmdb.org/t/p/original/${poster_path}`}
         alt={title}
         className="rounded-t-lg"
       />
-      <div className="p-4">
+      <div className="p-4 bg-white w-full">
         <div className="truncate font-semibold text-black">{title}</div>
         <div className="font-light">{release_date}</div>
       </div>
 
-      <ProgressCircle vote_average={vote_average} className='absolute bottom-16 left-4 h-12 w-12' />
+      <ProgressCircle
+        vote_average={vote_average}
+        className="absolute bottom-16 left-4 h-34 w-34 text-10"
+      />
     </div>
   );
 };

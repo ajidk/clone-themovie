@@ -1,6 +1,6 @@
 const Sort = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col p-4">
       <div>Sort Result by</div>
       <div className="form-control w-full max-w-xs mt-3">
         <select className="bg-white border px-2 py-3 rounded-lg">

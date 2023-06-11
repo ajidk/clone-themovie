@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../../app/hooks";
 const Watch = () => {
   const { providers, countries } = useAppSelector((state) => state.movie);
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-white p-4">
       <div className="form-control">
         <label className="flex items-start gap-x-3">
           <input type="checkbox" className="checkbox" />
@@ -12,7 +12,7 @@ const Watch = () => {
           </span>
         </label>
       </div>
-      <div className="form-control w-full max-w-xs mt-3">
+      <div className="w-full max-w-xs mt-3">
         <label className="text-black mb-2" htmlFor="">
           Country
         </label>
@@ -21,7 +21,7 @@ const Watch = () => {
             Pick one
           </option>
           {countries?.map((item: { english_name: string }, idx: string) => (
-            <option key={`country-${idx}`}>{item.english_name}</option>
+            <option key={`country-${idx}`}>{item.english_name.substring(0,24)}</option>
           ))}
         </select>
       </div>
@@ -38,6 +38,8 @@ const Watch = () => {
                 src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
                 alt={item.provider_name}
                 className="rounded-lg"
+                width={50}
+                height={50}
               />
             )
           )}

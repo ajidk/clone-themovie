@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../../app/hooks";
 const Filter = () => {
   const { genres, languages } = useAppSelector((state) => state.movie);
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col w-[260px] bg-white p-4">
       <section>
         <div className="mb-2 font-light">Show Me</div>
         <div className="form-control mb-2">

@@ -14,7 +14,15 @@ export default {
       customprimary:
         "linear-gradient(to right, rgba(31.5, 10.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 10.5, 52.5, 0.84) 50%, rgba(31.5, 10.5, 52.5, 0.84) 100%)",
     },
-    extend: {},
+    extend: {
+      spacing: {
+        30: "30px",
+        34: "34px",
+      },
+      fontSize: {
+        10: "10px",
+      },
+    },
   },
   plugins: [require("daisyui")],
 };

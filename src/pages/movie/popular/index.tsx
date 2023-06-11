@@ -24,37 +24,47 @@ const Popular = () => {
   useQuery("genres", () => dispatch(getGenres()));
   useQuery("languages", () => dispatch(getLanguages()));
 
-
-
   return (
-    <main className="container mx-auto h-screen">
+    <main className="container mx-auto h-screen px-10">
       {isLoading ? (
         "loading"
       ) : (
-        <section className="flex gap-x-5">
+        <section className="flex items-start w-full">
           <div>
-            <div className="min-w-[354px] w-[354px] rounded-lg drop-shadow mt-8 overflow-scroll">
-              <Sidebar />
-              <button className="bg-[#05B4E4] text-xl w-full rounded-xl py-2 text-white">
-                Search
-              </button>
-            </div>
+            <Sidebar />
+            {/* <button className="bg-[#05B4E4] text-xl w-full rounded-xl py-2 text-white">
+              Search
+            </button> */}
           </div>
+
           <div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 items-start mt-8 px-4 overscroll-auto">
-              {popular?.results?.map((item: cardMovieState, idx: string) => (
-                <Link
-                  key={`popular-${idx}`}
-                  to={`/${item.id}-${item.title.replaceAll(" ", "-")}`}
-                >
-                  <CardMovie
-                    poster_path={item.poster_path}
-                    title={item.title}
-                    release_date={item.release_date}
-                    vote_average={String(item.vote_average)}
-                  />
-                </Link>
-              ))}
+            <div className="pl-30 bg-transparent">
+              <div className="w-full block py-30">
+                <div className="-mt-30">
+                  <div className="w-full flex justify-between flex-wrap">
+                    <div className="flex flex-wrap justify-between w-full">
+                      {popular?.results?.map(
+                        (item: cardMovieState, idx: string) => (
+                          <Link
+                            key={`popular-${idx}`}
+                            to={`/${item.id}-${item.title.replaceAll(
+                              " ",
+                              "-"
+                            )}`}
+                          >
+                            <CardMovie
+                              poster_path={item.poster_path}
+                              title={item.title}
+                              release_date={item.release_date}
+                              vote_average={String(item.vote_average)}
+                            />
+                          </Link>
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

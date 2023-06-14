@@ -1,4 +1,3 @@
-import { useQuery } from "react-query";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { IcBar } from "../../assets/svg";
 import { CardMovie } from "../../components";
@@ -7,6 +6,7 @@ import { getTrendingAll } from "../../feature/movie/action";
 import { cardMovieState } from "../../components/Card";
 import { updateStatus } from "../../feature/general/slice";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const dataTrending: { title: string }[] = [
   {
@@ -22,15 +22,15 @@ const Dashboard = () => {
   const { listTrending } = useAppSelector((state) => state.movie);
   const { trending } = useAppSelector((state) => state.general);
   const value = trending === "today" ? "day" : "week";
-  console.log(trending);
+  console.log(value);
 
-  useQuery("trending", () => dispatch(getTrendingAll({ trending: value })));
+  useEffect(() => {
+    dispatch(getTrendingAll({ trending: value }));
+  }, [dispatch, value]);
 
   useEffect(() => {
     dispatch(updateStatus(dataTrending[0]?.title));
   }, [dispatch]);
-
-  // console.log(listTrending);
 
   return (
     <main className="bg-white">
@@ -49,16 +49,20 @@ const Dashboard = () => {
                 className="min-w-[150px] max-w-[150px]"
                 key={`tending-${idx}`}
               >
-                <CardMovie
-                  className="!border-none !bg-transparent !drop-shadow-none"
-                  classNameImg="rounded-lg min-h-[226px]"
-                  poster_path={item.poster_path}
-                  release_date={String(
-                    item.release_date ? item.release_date : item.first_air_date
-                  )}
-                  title={String(item.title ? item.title : item.name)}
-                  vote_average={parseFloat(item?.vote_average).toFixed(1)}
-                />
+                <Link to={`/${item?.id}-${String(item?.title).replaceAll(" ", "-")}`}>
+                  <CardMovie
+                    className="!border-none !bg-transparent !drop-shadow-none"
+                    classNameImg="rounded-lg min-h-[226px]"
+                    poster_path={item.poster_path}
+                    release_date={String(
+                      item.release_date
+                        ? item.release_date
+                        : item.first_air_date
+                    )}
+                    title={String(item.title ? item.title : item.name)}
+                    vote_average={parseFloat(item?.vote_average).toFixed(1)}
+                  />
+                </Link>
               </div>
             ))}
           </div>

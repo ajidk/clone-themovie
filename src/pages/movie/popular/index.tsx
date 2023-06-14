@@ -11,6 +11,7 @@ import {
 } from "../../../feature/movie/action";
 import Sidebar from "./sidebar";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const Popular = () => {
   const dispatch = useAppDispatch();
@@ -54,7 +55,7 @@ const Popular = () => {
                             <CardMovie
                               poster_path={item.poster_path}
                               title={item.title}
-                              release_date={item.release_date}
+                              release_date={moment(item.release_date).format('MMMM DD, YYYY')}
                               vote_average={String(item.vote_average)}
                             />
                           </Link>

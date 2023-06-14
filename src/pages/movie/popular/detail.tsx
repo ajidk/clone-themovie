@@ -55,7 +55,7 @@ const Detail = () => {
                 </span>
               </h3>
               <div className="flex items-center gap-x-2 text-white font-light">
-                {moment(detailMovie?.release_date).format("DD/MM/YYYY")}{" "}
+                {moment(detailMovie?.release_date).format('MMMM DD, YYYY')}{" "}
                 <div className="w-1 h-1 rounded-full bg-white" />
                 {detailMovie?.genres?.map(
                   (item: { name: string }, idx: string | number) => (

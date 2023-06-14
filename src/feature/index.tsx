@@ -1,2 +1,4 @@
 import movieReducer from "./movie/slice";
-export { movieReducer };
+import generalReducer from "./general/slice";
+
+export { movieReducer, generalReducer };

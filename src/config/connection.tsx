@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const server = "https://api.themoviedb.org/3/";
@@ -14,7 +15,6 @@ const requestInterceptor: any = (config: AxiosRequestConfig) => {
     "Content-Type": "multipart/form-data",
     Accept: "*/*",
     Authorization: "Bearer " + tokenData,
-    // lang: lang,
   };
   return config;
 };

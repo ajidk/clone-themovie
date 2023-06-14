@@ -1,18 +1,17 @@
+import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
 const Sort = () => {
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-4 w-full">
       <div>Sort Result by</div>
       <div className="form-control w-full max-w-xs mt-3">
-        <select className="bg-white border px-2 py-3 rounded-lg">
-          <option disabled selected>
-            Pick one
-          </option>
-          <option>Star Wars</option>
-          <option>Harry Potter</option>
-          <option>Lord of the Rings</option>
-          <option>Planet of the Apes</option>
-          <option>Star Trek</option>
-        </select>
+        <Select options={options} menuPlacement="top"  />
       </div>
     </div>
   );

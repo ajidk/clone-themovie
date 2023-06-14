@@ -32,11 +32,10 @@ const Popular = () => {
         <section className="flex items-start w-full">
           <div>
             <Sidebar />
-            {/* <button className="bg-[#05B4E4] text-xl w-full rounded-xl py-2 text-white">
+            <button className="bg-blue text-xl w-full rounded-xl py-2 text-white mt-5">
               Search
-            </button> */}
+            </button>
           </div>
-
           <div>
             <div className="pl-30 bg-transparent">
               <div className="w-full block py-30">
@@ -47,7 +46,7 @@ const Popular = () => {
                         (item: cardMovieState, idx: string) => (
                           <Link
                             key={`popular-${idx}`}
-                            to={`/${item.id}-${item.title.replaceAll(
+                            to={`/movie/popular/${item.id}-${item.title.replaceAll(
                               " ",
                               "-"
                             )}`}

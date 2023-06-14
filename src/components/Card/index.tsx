@@ -7,6 +7,10 @@ export interface cardMovieState {
   title: string;
   release_date: string;
   vote_average: string;
+  className?: string;
+  classNameImg?: string;
+  first_air_date?: string;
+  name?: string;
 }
 
 const CardMovie: React.FC<cardMovieState> = ({
@@ -14,15 +18,21 @@ const CardMovie: React.FC<cardMovieState> = ({
   title,
   release_date,
   vote_average,
+  className,
+  classNameImg,
 }) => {
   return (
-    <div className="relative top-0 left-0 flex flex-wrap items-start border border-[#e3e3e3] overflow-hidden max-w-[200px] mt-30 rounded-lg">
+    <div
+      className={`relative top-0 left-0 flex flex-wrap items-start border border-[#e3e3e3] overflow-hidden max-w-[200px] mt-30 rounded-lg ${className}`}
+    >
       <img
         src={`https://image.tmdb.org/t/p/original/${poster_path}`}
         alt={title}
-        className="rounded-t-lg"
+        className={`rounded-t-lg min-h-[180px] w-full ${classNameImg}`}
+        height={180}
+        width={180}
       />
-      <div className="p-4 bg-white w-full">
+      <div className="p-4 w-full">
         <div className="truncate font-semibold text-black">{title}</div>
         <div className="font-light">{release_date}</div>
       </div>

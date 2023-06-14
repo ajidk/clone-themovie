@@ -1,44 +1,120 @@
+import { ChangeEvent, useState } from "react";
 import { useAppSelector } from "../../../../app/hooks";
+import Select from "react-select";
 
 const Filter = () => {
   const { genres, languages } = useAppSelector((state) => state.movie);
+
+  const objCountries = languages?.map((obj: { english_name: string }) => ({
+    ...obj,
+    value: obj.english_name,
+    label: obj.english_name,
+  }));
+
+  const [shownMe, setShownMe] = useState("");
+
+  const shownMeConfig = [
+    {
+      title: "Everything",
+    },
+    {
+      title: "Movies I Haven't Seen",
+    },
+    {
+      title: "Movies I Have Seen",
+    },
+  ];
+
+  console.log(shownMe);
+
+  const [allAvalibities, setAllAvalibities] = useState(true);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([
+    "Stream",
+    "Free",
+    "Ads",
+    "Rent",
+    "Buy",
+  ]);
+
+  const [date, setDate] = useState(true);
+  const [selectDate, setSelectDate] = useState<string[]>([
+    "Premiere",
+    "Theatrical (limited)",
+    "Theatrical",
+    "Digital",
+    "Physical",
+    "TV",
+  ]);
+
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const optionId = event.target.value;
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      setSelectedOptions([...selectedOptions, optionId]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((id) => id !== optionId));
+    }
+  };
+
+  const handleChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
+    const optionId = event.target.value;
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      setSelectDate([...selectDate, optionId]);
+    } else {
+      setSelectDate(selectDate.filter((item) => item !== optionId));
+    }
+  };
+
+  const handleGenres = (item: string) => {
+    console.log(item);
+
+    // const item = event.target.value;
+    // const isChecked = event.target.checked;
+    // if (isChecked) {
+    //   setSelectDate([...selectDate, optionId]);
+    // } else {
+    //   setSelectDate(selectDate.filter((item) => item !== optionId));
+    // }
+  };
+
+  const availabilitiesConfig = [
+    { title: "Stream" },
+    { title: "Free" },
+    { title: "Ads" },
+    { title: "Rent" },
+    { title: "Buy" },
+  ];
+
+  const datesConfig = [
+    { title: "Premiere" },
+    { title: "Theatrical (limited)" },
+    { title: "Theatrical" },
+    { title: "Digital" },
+    { title: "Physical" },
+    { title: "TV" },
+  ];
+
   return (
     <main className="flex flex-col w-[260px] bg-white p-4">
       <section>
         <div className="mb-2 font-light">Show Me</div>
-        <div className="form-control mb-2">
-          <label className="flex items-start gap-x-3">
-            <input
-              type="radio"
-              className="radio-primary radio"
-              name="show_me"
-              value="Everything"
-            />
-            <span className="label-text">Everything</span>
-          </label>
-        </div>
-        <div className="form-control mb-2">
-          <label className="flex items-start gap-x-3">
-            <input
-              type="radio"
-              className="radio-primary radio"
-              name="show_me"
-              value="Movies I Haven't Seen"
-            />
-            <span className="label-text">Movies I Haven't Seen</span>
-          </label>
-        </div>
-        <div className="form-control">
-          <label className="flex items-start gap-x-3">
-            <input
-              type="radio"
-              className="radio-primary radio"
-              name="show_me"
-              value="Movies I Have Seen"
-            />
-            <span className="label-text">Movies I Have Seen</span>
-          </label>
-        </div>
+        {shownMeConfig.map((item, idx) => (
+          <div className="form-control mb-2" key={`show_me-${idx}`}>
+            <label className="flex items-start gap-x-3">
+              <input
+                type="radio"
+                className="radio-primary radio"
+                name="show_me"
+                value={item.title}
+                onChange={(e) => setShownMe(e.target.value)}
+              />
+              <span className="label-text">{item.title}</span>
+            </label>
+          </div>
+        ))}
       </section>
       <section className="my-2">
         <div className="font-light">Availabilities </div>
@@ -49,11 +125,30 @@ const Filter = () => {
               className="checkbox"
               name="all_avalibities"
               value="Search all availabilities?"
-              checked
+              checked={allAvalibities}
+              onChange={() => setAllAvalibities(!allAvalibities)}
             />
             <span className="label-text">Search all availabilities?</span>
           </label>
         </div>
+        {availabilitiesConfig.map((item, idx) => (
+          <div
+            className={`form-control mt-2 ${allAvalibities && "hidden"}`}
+            key={`availabilities-${idx}`}
+          >
+            <label className="flex items-center gap-x-3">
+              <input
+                type="checkbox"
+                className="checkbox"
+                name="ott_monetization_type"
+                value={item.title}
+                onChange={handleCheckboxChange}
+                checked={selectedOptions.includes(item.title)}
+              />
+              <span className="label-text">{item.title}</span>
+            </label>
+          </div>
+        ))}
       </section>
       <section className="my-2">
         <div className="font-light">Release Dates</div>
@@ -62,12 +157,31 @@ const Filter = () => {
             <input
               type="checkbox"
               className="checkbox"
-              name="all_avalibities"
-              checked
+              name="releases_date"
+              checked={date}
+              onChange={() => setDate(!date)}
             />
             <span className="label-text">Search all releases?</span>
           </label>
         </div>
+        {datesConfig.map((item, idx) => (
+          <div
+            className={`form-control mt-2 ${date && "hidden"}`}
+            key={`availabilities-${idx}`}
+          >
+            <label className="flex items-center gap-x-3">
+              <input
+                type="checkbox"
+                className="checkbox"
+                name="ott_date_type"
+                value={item.title}
+                onChange={handleChangeDate}
+                checked={selectDate.includes(item.title)}
+              />
+              <span className="label-text">{item.title}</span>
+            </label>
+          </div>
+        ))}
         <div className="flex justify-between items-center mb-2">
           from :{" "}
           <input
@@ -88,8 +202,9 @@ const Filter = () => {
         <div className="flex flex-wrap items-center gap-2 mt-2">
           {genres?.map((item: { name: string }, idx: string) => (
             <span
-              className="px-4 py-1 rounded-2xl border cursor-pointer text-sm"
+              className="px-4 py-1 rounded-2xl border cursor-pointer text-sm hover:bg-blue hover:text-white"
               key={`genres-${idx}`}
+              onClick={() => handleGenres(item.name)}
             >
               {item.name}
             </span>
@@ -101,18 +216,12 @@ const Filter = () => {
           <label className="text-black mb-2" htmlFor="">
             Languages
           </label>
-          <select className="bg-white border px-2 py-3 rounded-lg">
-            <option disabled selected>
-              Pick one
-            </option>
-            {languages?.map((item: { english_name: string }, idx: string) => (
-              <option key={`languages-${idx}`}>{item.english_name}</option>
-            ))}
-            <option>Harry Potter</option>
-            <option>Lord of the Rings</option>
-            <option>Planet of the Apes</option>
-            <option>Star Trek</option>
-          </select>
+
+          <Select
+            options={objCountries}
+            menuPlacement="auto"
+            className="z-50"
+          />
         </div>
       </section>
       <section>

@@ -5,14 +5,22 @@ export default {
   theme: {
     maxHeight: {
       imgPop:
-        "calc((var(--maxPrimaryPageWidth) - 80px - 260px - (var(--discoverColumnPadding) * var(--numberOfDiscoverColumns))) / var(--numberOfDiscoverColumns) * 1.5)",
+        "calc((var(--1300px) - 80px - 260px - (var(--30px) * var(--5))) / var(--5) * 1.5)",
     },
     backgroundPosition: {
       customLeft: "left calc((50vw - 170px) - 340px) top",
+      landing: "50% 200px",
     },
     backgroundImage: {
       customprimary:
         "linear-gradient(to right, rgba(31.5, 10.5, 52.5, 1) calc((50vw - 170px) - 340px), rgba(31.5, 10.5, 52.5, 0.84) 50%, rgba(31.5, 10.5, 52.5, 0.84) 100%)",
+      bar: "src/assets/svg/bar.svg",
+    },
+    backgroundSize: {
+      maxPrimaryPageWidth: "1300px",
+    },
+    maxWidth: {
+      maxPrimaryPageWidth: "1300px",
     },
     extend: {
       spacing: {
@@ -22,7 +30,12 @@ export default {
       fontSize: {
         10: "10px",
       },
+      colors: {
+        blue: "#05B4E4",
+        darkBlue: "#042541",
+        
+      },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("prettier-plugin-tailwindcss")],
 };

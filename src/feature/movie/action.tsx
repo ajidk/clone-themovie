@@ -126,3 +126,24 @@ export const getDetailMovie = createAsyncThunk<string, { movie_id: string }>(
     }
   }
 );
+
+export const getTrendingAll = createAsyncThunk<string, { trending: string }>(
+  "movie/trending-all",
+  async ({ trending }, { rejectWithValue }) => {
+    try {
+      const res: any = await connection.get(
+        `trending/all/${trending}?language=en-US`
+      );
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+
+      return res.data.results;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);

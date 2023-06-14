@@ -7,6 +7,7 @@ import {
   getLanguages,
   getPopularMovie,
   getProviderMovie,
+  getTrendingAll,
 } from "./action";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   genres: null,
   languages: null,
   detailMovie: null,
+  listTrending: null,
 } as any;
 
 const movieSlice = createSlice({
@@ -64,6 +66,13 @@ const movieSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getDetailMovie.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getTrendingAll.fulfilled, (state, action) => {
+      state.listTrending = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getTrendingAll.pending, (state) => {
       state.loading = true;
     });
   },

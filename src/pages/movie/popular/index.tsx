@@ -46,7 +46,7 @@ const Popular = () => {
                         (item: cardMovieState, idx: string) => (
                           <Link
                             key={`popular-${idx}`}
-                            to={`/movie/popular/${item.id}-${item.title.replaceAll(
+                            to={`/${item.id}-${item.title.replaceAll(
                               " ",
                               "-"
                             )}`}

@@ -4,11 +4,17 @@ import { createSlice } from "@reduxjs/toolkit";
 interface CounterState {
   value: number;
   trending: string;
+  popular: string;
+  watch: string;
+  trailer: string;
 }
 
 const initialState: CounterState = {
   value: 0,
   trending: "",
+  popular: "",
+  watch: "",
+  trailer: "",
 };
 
 export const generalSlice = createSlice({
@@ -26,13 +32,29 @@ export const generalSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
-    updateStatus: (state, action: PayloadAction<string>) => {
+    updateTrending: (state, action: PayloadAction<string>) => {
       state.trending = action.payload;
+    },
+    updatePopular: (state, action: PayloadAction<string>) => {
+      state.popular = action.payload;
+    },
+    updateWatch: (state, action: PayloadAction<string>) => {
+      state.watch = action.payload;
+    },
+    updateTrailer: (state, action: PayloadAction<string>) => {
+      state.trailer = action.payload;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount, updateStatus } =
-  generalSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  updateTrending,
+  updatePopular,
+  updateWatch,
+  updateTrailer,
+} = generalSlice.actions;
 
 export default generalSlice.reducer;

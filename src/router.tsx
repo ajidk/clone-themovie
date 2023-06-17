@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Dashboard, Detail, Popular } from "./pages";
 
 export const router = createBrowserRouter([

@@ -225,7 +225,7 @@ const Detail = () => {
             <p className="flex flex-wrap gap-2 mt-2">
               {Array(10)
                 .fill("oke")
-                .map((item, idx) => (
+                .map((_item, idx) => (
                   <span
                     className="bg-gray-300 rounded-lg px-4 py-1"
                     key={`keywords-${idx}`}
@@ -247,7 +247,7 @@ const Detail = () => {
             <p>
               {Array(4)
                 .fill("oke")
-                .map((item, idx) => (
+                .map((_item, idx) => (
                   <div
                     className="flex items-center gap-x-4 mb-2"
                     key={`contributor-${idx}`}

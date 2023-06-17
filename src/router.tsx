@@ -1,23 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Dashboard, Detail, Popular } from "./pages";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/movie",
     element: <Popular />,
     // children: [
-    //   { element: <Navigate to="/movie/popular" />, index: true },
-    //   { path: "popular", element: <Popular /> },
-    //   { path: "popular/:movie_id", element: <Detail /> },
+    //   { element: <Navigate to="/" />, index: true },
+    //   { path: "", element: <Popular /> },
+    //   { path: "/:movie_id", element: <Detail /> },
     // ],
   },
   {
-    path: "/:movie_id",
+    path: "/movie/:movie_id",
     element: <Detail />,
   },
 
   {
-    path: "/dashboard",
+    path: "/",
     element: <Dashboard />,
   },
 ]);

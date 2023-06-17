@@ -135,8 +135,6 @@ export const getTrendingAll = createAsyncThunk<string, { trending: string }>(
         `trending/${trending}/day?language=en-US`
       );
 
-      console.log(res);
-
       const messages = "something went wrong";
       if (res.status != 200) {
         throw new Error(messages);

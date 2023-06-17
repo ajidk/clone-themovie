@@ -16,7 +16,7 @@ const CustomButton: React.FC<customBtnState> = ({
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex items-center justify-start border border-darkBlue rounded-2xl gap-x-2">
+    <div className="hidden md:flex items-center justify-start border border-darkBlue rounded-2xl gap-x-2">
       {data?.map((item, idx) => (
         <h3
           key={`CustomButton-${idx}`}

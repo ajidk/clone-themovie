@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { generalReducer, movieReducer } from "../feature";
+import { generalReducer, movieReducer, tvSeriesReducer } from "../feature";
 
 export const store = configureStore({
-  reducer: { movie: movieReducer, general: generalReducer },
+  reducer: {
+    movie: movieReducer,
+    general: generalReducer,
+    series: tvSeriesReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

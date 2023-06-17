@@ -21,6 +21,7 @@ const initialState = {
   detailMovie: null,
   listTrending: null,
   listMovie: null,
+  tvLatest: null,
 } as any;
 
 const movieSlice = createSlice({

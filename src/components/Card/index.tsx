@@ -6,7 +6,7 @@ export interface cardMovieState {
   poster_path: string;
   title: string;
   release_date: string;
-  vote_average: string;
+  vote_average?: string;
   className?: string;
   classNameImg?: string;
   first_air_date?: string;
@@ -28,7 +28,7 @@ const CardMovie: React.FC<cardMovieState> = ({
       <img
         src={`https://image.tmdb.org/t/p/original/${poster_path}`}
         alt={title}
-        className={`rounded-t-lg min-h-[180px] w-full ${classNameImg}`}
+        className={`rounded-t-lg min-h-[180px] object-cover w-full ${classNameImg}`}
         height={180}
         width={180}
       />
@@ -37,10 +37,12 @@ const CardMovie: React.FC<cardMovieState> = ({
         <div className="font-light">{release_date}</div>
       </div>
 
-      <ProgressCircle
-        vote_average={vote_average}
-        className="absolute bottom-16 left-4 h-34 w-34 text-10"
-      />
+      {vote_average && (
+        <ProgressCircle
+          vote_average={vote_average}
+          className="absolute bottom-16 left-4 h-34 w-34 text-10"
+        />
+      )}
     </div>
   );
 };

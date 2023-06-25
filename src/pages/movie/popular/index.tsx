@@ -31,14 +31,14 @@ const Popular = () => {
         "loading"
       ) : (
         <section className="flex items-start w-full">
-          <div>
+          <div className="hidden md:block">
             <Sidebar />
             <button className="bg-blue text-xl w-full rounded-xl py-2 text-white mt-5">
               Search
             </button>
           </div>
           <div>
-            <div className="pl-30 bg-transparent">
+            <div className="md:pl-30 bg-transparent">
               <div className="w-full block py-30">
                 <div className="-mt-30">
                   <div className="w-full flex justify-between flex-wrap">

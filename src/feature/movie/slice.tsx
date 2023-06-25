@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getCountry,
+  getCredits,
   getDetailMovie,
   getGenres,
   getLanguages,
@@ -22,6 +23,7 @@ const initialState = {
   listTrending: null,
   listMovie: null,
   tvLatest: null,
+  credits: null,
 } as any;
 
 const movieSlice = createSlice({
@@ -83,6 +85,13 @@ const movieSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getMovieList.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getCredits.fulfilled, (state, action) => {
+      state.credits = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getCredits.pending, (state) => {
       state.loading = true;
     });
   },

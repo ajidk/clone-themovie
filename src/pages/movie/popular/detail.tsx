@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { getDetailMovie } from "../../../feature/movie/action";
+import { getCredits, getDetailMovie } from "../../../feature/movie/action";
 import moment from "moment";
 import ProgressCircle from "../../../components/Card/ProgressCircle";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -40,10 +40,16 @@ const dSocial = [
   },
 ];
 
+interface castState {
+  profile_path: string;
+  character: string;
+  name: string;
+}
+
 const Detail = () => {
   const { movie_id } = useParams();
   const dispatch = useAppDispatch();
-  const { detailMovie } = useAppSelector((state) => state.movie);
+  const { detailMovie, credits } = useAppSelector((state) => state.movie);
   const [social, setSocial] = useState(dSocial[0].title);
   const movie = movie_id?.split("-").find((_item, idx) => idx === 0);
 
@@ -51,12 +57,17 @@ const Detail = () => {
     dispatch(getDetailMovie({ movie_id: String(movie) }))
   );
 
+  useQuery("credits-movie", () =>
+    dispatch(getCredits({ movie_id: String(movie_id) }))
+  );
+
   const url = "https://image.tmdb.org/t/p/original";
 
   const duration = moment.duration(detailMovie?.runtime, "minutes");
   const hours = Math.floor(duration.asHours());
   const minutes = duration.minutes();
-  console.log(detailMovie);
+
+  console.log("kredit", credits?.cast);
 
   return (
     <main>
@@ -132,23 +143,21 @@ const Detail = () => {
           <h3 className="capitalize text-2xl font-semibold">top bill cast</h3>
           <div className="flex justify-start content-start items-center pb-5 gap-x-5">
             <div className="flex gap-4 overflow-scroll">
-              {Array(20)
-                .fill("oke")
-                .map((_item, idx) => (
-                  <div
-                    className="min-w-[150px] max-w-[150px]"
-                    key={`bill-top-${idx}`}
-                  >
-                    <CardMovie
-                      poster_path={url.concat(detailMovie?.backdrop_path)}
-                      release_date="Noah Morgan"
-                      title="title"
-                    />
-                  </div>
-                ))}
+              {credits?.cast?.map((item: castState, idx: string) => (
+                <div
+                  className="min-w-[150px] max-w-[150px]"
+                  key={`bill-top-${idx}`}
+                >
+                  <CardMovie
+                    poster_path={`https://www.themoviedb.org/t/p/w276_and_h350_face/${item.profile_path}`}
+                    release_date={item.character}
+                    title={item.name}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-          <h3 className="capitalize text-gray-400">Full Cast & Crew</h3>
+          <button className="capitalize text-gray-400">Full Cast & Crew</button>
           <div className="flex justify-start items-start gap-x-8 mt-5">
             <h4 className="font-semibold text-lg capitalize">social</h4>
             <div className="flex gap-x-4 items-center">
@@ -203,7 +212,7 @@ const Detail = () => {
           </h3>
           <div className="mt-3">des</div>
         </div>
-        <div className="col-span-3 bg-red-500 flex flex-col gap-y-5">
+        <div className="col-span-3 flex flex-col gap-y-5">
           <div>
             <h5 className="capitalize font-semibold">origina mate</h5>
             <p>Culpa mía</p>

@@ -168,3 +168,26 @@ export const getMovieList = createAsyncThunk<string, { list: string }>(
     }
   }
 );
+
+export const getCredits = createAsyncThunk<string, { movie_id: string }>(
+  "movie/get-credits",
+  async ({ movie_id }, { rejectWithValue }) => {
+    try {
+      const res: any = await connection.get(
+        `movie/${movie_id}/credits?language=en-US`
+      );
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+
+      // console.log("res", res);
+
+      return res.data;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);

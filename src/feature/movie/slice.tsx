@@ -5,15 +5,58 @@ import {
   getCredits,
   getDetailMovie,
   getGenres,
+  getKeywords,
   getLanguages,
   getMovieList,
   getPopularMovie,
   getProviderMovie,
+  getRecomendations,
+  getReviews,
   getTrendingAll,
 } from "./action";
 
+export interface castState {
+  profile_path: string;
+  character: string;
+  name: string;
+}
+
+export interface reviewState {
+  author_details: { avatar_path: string };
+  author: string;
+  updated_at: string;
+  content: string;
+}
+
+export interface recomendationState {
+  backdrop_path: string;
+  title: string;
+  vote_average: string;
+}
+
+export interface keywordState {
+  name: string;
+}
+
+interface movieState {
+  popular: any;
+  loading: any;
+  providers: any;
+  countries: any;
+  genres: any;
+  languages: any;
+  detailMovie: any;
+  listTrending: any;
+  listMovie: any;
+  tvLatest: any;
+  cast: castState[] | null;
+  reviews: reviewState[] | null;
+  recomendations: recomendationState[] | null;
+  keywords: keywordState[] | null;
+}
+
 const initialState = {
-  popular: [],
+  popular: null,
   loading: false,
   providers: null,
   countries: null,
@@ -23,8 +66,11 @@ const initialState = {
   listTrending: null,
   listMovie: null,
   tvLatest: null,
-  credits: null,
-} as any;
+  cast: null,
+  reviews: null,
+  recomendations: null,
+  keywords: null,
+} as unknown as movieState;
 
 const movieSlice = createSlice({
   name: "movie",
@@ -88,10 +134,31 @@ const movieSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getCredits.fulfilled, (state, action) => {
-      state.credits = action.payload;
+      state.cast = action.payload.cast;
       state.loading = false;
     });
     builder.addCase(getCredits.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getReviews.fulfilled, (state, action) => {
+      state.reviews = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getReviews.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getRecomendations.fulfilled, (state, action) => {
+      state.recomendations = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getRecomendations.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getKeywords.fulfilled, (state, action) => {
+      state.keywords = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getKeywords.pending, (state) => {
       state.loading = true;
     });
   },

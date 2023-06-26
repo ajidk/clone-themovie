@@ -1,6 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import connection from "../../config/connection";
+import {
+  castState,
+  keywordState,
+  recomendationState,
+  reviewState,
+} from "./slice";
+
+interface movieState {
+  movie_id: string;
+}
 
 export const getPopularMovie = createAsyncThunk(
   "movie/list-popular",
@@ -108,7 +118,7 @@ export const getLanguages = createAsyncThunk(
   }
 );
 
-export const getDetailMovie = createAsyncThunk<string, { movie_id: string }>(
+export const getDetailMovie = createAsyncThunk<string, movieState>(
   "movie/detail-movie",
   async ({ movie_id }, { rejectWithValue }) => {
     try {
@@ -169,12 +179,38 @@ export const getMovieList = createAsyncThunk<string, { list: string }>(
   }
 );
 
-export const getCredits = createAsyncThunk<string, { movie_id: string }>(
-  "movie/get-credits",
+export const getCredits = createAsyncThunk<
+  { cast: castState[]; crew: string },
+  movieState
+>("movie/get-credits", async ({ movie_id }, { rejectWithValue }) => {
+  try {
+    const res = await connection.get(
+      `movie/${movie_id}/credits?language=en-US`
+    );
+
+    const messages = "something went wrong";
+    if (res.status != 200) {
+      throw new Error(messages);
+    }
+
+    const { cast, crew } = res.data;
+
+    return {
+      cast: cast,
+      crew: crew,
+    };
+  } catch (e: any) {
+    console.log("Error", e);
+    return rejectWithValue(e.res.data);
+  }
+});
+
+export const getReviews = createAsyncThunk<reviewState[], movieState>(
+  "movie/get-reviews",
   async ({ movie_id }, { rejectWithValue }) => {
     try {
-      const res: any = await connection.get(
-        `movie/${movie_id}/credits?language=en-US`
+      const res = await connection.get(
+        `movie/${movie_id}/reviews?language=en-US&page=1`
       );
 
       const messages = "something went wrong";
@@ -182,9 +218,49 @@ export const getCredits = createAsyncThunk<string, { movie_id: string }>(
         throw new Error(messages);
       }
 
-      // console.log("res", res);
+      return res.data.results;
+    } catch (e: any) {
+      console.log("Error", e);
+      return rejectWithValue(e.res.data);
+    }
+  }
+);
 
-      return res.data;
+export const getRecomendations = createAsyncThunk<
+  recomendationState[],
+  movieState
+>("movie/get-recomendations", async ({ movie_id }, { rejectWithValue }) => {
+  try {
+    const res = await connection.get(
+      `movie/${movie_id}/recommendations?language=en-US&page=1`
+    );
+
+    const messages = "something went wrong";
+    if (res.status != 200) {
+      throw new Error(messages);
+    }
+
+    return res.data.results;
+  } catch (e: any) {
+    console.log("Error", e);
+    return rejectWithValue(e.res.data);
+  }
+});
+
+export const getKeywords = createAsyncThunk<keywordState[], movieState>(
+  "movie/get-Keywords",
+  async ({ movie_id }, { rejectWithValue }) => {
+    try {
+      const res = await connection.get(
+        `movie/${movie_id}/keywords?language=en-US&page=1`
+      );
+
+      const messages = "something went wrong";
+      if (res.status != 200) {
+        throw new Error(messages);
+      }
+
+      return res.data.keywords;
     } catch (e: any) {
       console.log("Error", e);
       return rejectWithValue(e.res.data);

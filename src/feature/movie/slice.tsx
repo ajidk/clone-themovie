@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 import {
   getCountry,
@@ -38,17 +37,62 @@ export interface keywordState {
   name: string;
 }
 
+export interface listMovieState {
+  id: string;
+  poster_path: string;
+  release_date: string;
+  first_air_date: string;
+  title: string;
+  name: string;
+  vote_average: string;
+}
+
+export interface languageState {
+  english_name: string;
+}
+export interface providerState {
+  logo_path: string;
+  provider_name: string;
+}
+
+export interface popularState {
+  id?: string;
+  poster_path: string;
+  title: string;
+  release_date: string;
+  vote_average?: string;
+  className?: string;
+  classNameImg?: string;
+  first_air_date?: string;
+  name?: string;
+}
+
+export interface detailMovieState {
+  runtime: string;
+  backdrop_path: string;
+  poster_path: string;
+  title: string;
+  release_date: string;
+  genres: { name: string }[];
+  vote_average: number;
+  tagline: string;
+  overview: string;
+  status: string;
+  original_language: string;
+  budget: number;
+  revenue: number;
+}
+
 interface movieState {
-  popular: any;
-  loading: any;
-  providers: any;
-  countries: any;
-  genres: any;
-  languages: any;
-  detailMovie: any;
-  listTrending: any;
-  listMovie: any;
-  tvLatest: any;
+  loading: boolean;
+  popular: popularState[] | null;
+  providers: providerState[] | null;
+  countries: languageState[] | null;
+  genres: keywordState[] | null;
+  languages: languageState[] | null;
+  detailMovie: detailMovieState | null;
+  listTrending: listMovieState[] | null;
+  listMovie: listMovieState[] | null;
   cast: castState[] | null;
   reviews: reviewState[] | null;
   recomendations: recomendationState[] | null;
@@ -65,7 +109,6 @@ const initialState = {
   detailMovie: null,
   listTrending: null,
   listMovie: null,
-  tvLatest: null,
   cast: null,
   reviews: null,
   recomendations: null,

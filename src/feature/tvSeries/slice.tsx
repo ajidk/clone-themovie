@@ -1,11 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from "@reduxjs/toolkit";
 import { getListSeries } from "./action";
+import { listMovieState } from "../movie/slice";
+
+interface tvSeriesState {
+  loading: boolean;
+  listSeries: listMovieState[] | null;
+}
 
 const initialState = {
   loading: false,
   listSeries: null,
-} as any;
+} as tvSeriesState;
 
 const tvSeriesSlice = createSlice({
   name: "movie",

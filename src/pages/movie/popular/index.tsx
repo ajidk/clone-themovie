@@ -2,8 +2,8 @@ import moment from "moment";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { CardMovie, Header } from "../../../components";
-import { cardMovieState } from "../../../components/Card";
+import { CardMovie } from "../../../components";
+import MainLayout from "../../../components/Layouts";
 import Loading from "../../../components/Loading";
 import {
   getCountry,
@@ -13,7 +13,6 @@ import {
   getProviderMovie,
 } from "../../../feature/movie/action";
 import Sidebar from "./sidebar";
-import MainLayout from "../../../components/Layouts";
 
 const Popular = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +23,8 @@ const Popular = () => {
   useQuery("country", () => dispatch(getCountry()));
   useQuery("genres", () => dispatch(getGenres()));
   useQuery("languages", () => dispatch(getLanguages()));
+
+  console.log(popular);
 
   return (
     <MainLayout>
@@ -44,26 +45,24 @@ const Popular = () => {
                   <div className="-mt-30">
                     <div className="w-full flex justify-start md:justify-between flex-wrap">
                       <div className="flex flex-wrap justify-start gap-4 md:justify-between w-full">
-                        {popular?.results?.map(
-                          (item: cardMovieState, idx: string) => (
-                            <Link
-                              key={`popular-${idx}`}
-                              to={`/movie/${item.id}-${item.title.replaceAll(
-                                " ",
-                                "-"
-                              )}`}
-                            >
-                              <CardMovie
-                                poster_path={item.poster_path}
-                                title={item.title}
-                                release_date={moment(item.release_date).format(
-                                  "MMMM DD, YYYY"
-                                )}
-                                vote_average={String(item.vote_average)}
-                              />
-                            </Link>
-                          )
-                        )}
+                        {popular?.map((item, idx) => (
+                          <Link
+                            key={`popular-${idx}`}
+                            to={`/movie/${item.id}-${item.title.replaceAll(
+                              " ",
+                              "-"
+                            )}`}
+                          >
+                            <CardMovie
+                              poster_path={item.poster_path}
+                              title={item.title}
+                              release_date={moment(item.release_date).format(
+                                "MMMM DD, YYYY"
+                              )}
+                              vote_average={String(item.vote_average)}
+                            />
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </div>

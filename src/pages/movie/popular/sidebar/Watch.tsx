@@ -27,23 +27,16 @@ const Watch = () => {
         <Select options={objCountries} />
       </div>
       <div className="grid grid-cols-4 gap-3 items-center mt-4 overflow-scroll">
-        {providers
-          ?.slice(0, 32)
-          ?.map(
-            (
-              item: { logo_path: string; provider_name: string },
-              idx: string
-            ) => (
-              <img
-                key={`provider-${idx}`}
-                src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
-                alt={item.provider_name}
-                className="rounded-lg"
-                width={50}
-                height={50}
-              />
-            )
-          )}
+        {providers?.slice(0, 32)?.map((item, idx) => (
+          <img
+            key={`provider-${idx}`}
+            src={`https://image.tmdb.org/t/p/original/${item.logo_path}`}
+            alt={item.provider_name}
+            className="rounded-lg"
+            width={50}
+            height={50}
+          />
+        ))}
       </div>
     </div>
   );

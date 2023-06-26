@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { IcBar } from "../../assets/svg";
 import { CardMovie } from "../../components";
-import { cardMovieState } from "../../components/Card";
+import MainLayout from "../../components/Layouts";
 import Loading from "../../components/Loading";
 import {
   updatePopular,
@@ -15,7 +15,6 @@ import { getListSeries } from "../../feature/tvSeries/action";
 import { dataPopular, dataSeries, dataTrending } from "../../utils/datas";
 import { searchTitle } from "../../utils/helper";
 import CustomButton from "./component/button";
-import MainLayout from "../../components/Layouts";
 
 const Dashboard = () => {
   const dispatch = useAppDispatch();
@@ -100,7 +99,7 @@ const Dashboard = () => {
               </div>
               <div className="flex justify-start content-start items-center gap-x-5">
                 <div className="flex gap-x-5 overflow-scroll relative">
-                  {listTrending?.map((item: cardMovieState, idx: string) => (
+                  {listTrending?.map((item, idx) => (
                     <div
                       className="min-w-[150px] max-w-[150px]"
                       key={`tending-${idx}`}
@@ -145,7 +144,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex justify-start content-start items-center gap-x-5">
                   <div className="flex gap-x-5  overflow-scroll relative">
-                    {listSeries?.map((item: cardMovieState, idx: string) => (
+                    {listSeries?.map((item, idx) => (
                       <div
                         className="min-w-[150px] max-w-[150px]"
                         key={`tending-${idx}`}
@@ -191,7 +190,7 @@ const Dashboard = () => {
               </div>
               <div className="flex justify-start content-start items-center gap-x-5">
                 <div className="flex gap-x-5  overflow-scroll relative">
-                  {listMovie?.map((item: cardMovieState, idx: string) => (
+                  {listMovie?.map((item, idx) => (
                     <div
                       className="min-w-[150px] max-w-[150px]"
                       key={`tending-${idx}`}

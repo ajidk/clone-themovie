@@ -3,7 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import connection from "../../config/connection";
 import {
   castState,
+  detailMovieState,
   keywordState,
+  listMovieState,
   recomendationState,
   reviewState,
 } from "./slice";
@@ -25,7 +27,7 @@ export const getPopularMovie = createAsyncThunk(
         throw new Error(messages);
       }
 
-      return res.data;
+      return res.data.results;
       //   return data;
     } catch (e: any) {
       console.log("Error", e);
@@ -118,7 +120,7 @@ export const getLanguages = createAsyncThunk(
   }
 );
 
-export const getDetailMovie = createAsyncThunk<string, movieState>(
+export const getDetailMovie = createAsyncThunk<detailMovieState, movieState>(
   "movie/detail-movie",
   async ({ movie_id }, { rejectWithValue }) => {
     try {
@@ -137,47 +139,47 @@ export const getDetailMovie = createAsyncThunk<string, movieState>(
   }
 );
 
-export const getTrendingAll = createAsyncThunk<string, { trending: string }>(
-  "movie/trending-all",
-  async ({ trending }, { rejectWithValue }) => {
-    try {
-      const res: any = await connection.get(
-        `trending/${trending}/day?language=en-US`
-      );
+export const getTrendingAll = createAsyncThunk<
+  listMovieState[],
+  { trending: string }
+>("movie/trending-all", async ({ trending }, { rejectWithValue }) => {
+  try {
+    const res: any = await connection.get(
+      `trending/${trending}/day?language=en-US`
+    );
 
-      const messages = "something went wrong";
-      if (res.status != 200) {
-        throw new Error(messages);
-      }
-
-      return res.data.results;
-    } catch (e: any) {
-      console.log("Error", e);
-      return rejectWithValue(e.res.data);
+    const messages = "something went wrong";
+    if (res.status != 200) {
+      throw new Error(messages);
     }
+
+    return res.data.results;
+  } catch (e: any) {
+    console.log("Error", e);
+    return rejectWithValue(e.res.data);
   }
-);
+});
 
-export const getMovieList = createAsyncThunk<string, { list: string }>(
-  "movie/movie-list",
-  async ({ list }, { rejectWithValue }) => {
-    try {
-      const res: any = await connection.get(
-        `movie/${list}?language=en-US&page=1`
-      );
+export const getMovieList = createAsyncThunk<
+  listMovieState[],
+  { list: string }
+>("movie/movie-list", async ({ list }, { rejectWithValue }) => {
+  try {
+    const res: any = await connection.get(
+      `movie/${list}?language=en-US&page=1`
+    );
 
-      const messages = "something went wrong";
-      if (res.status != 200) {
-        throw new Error(messages);
-      }
-
-      return res.data.results;
-    } catch (e: any) {
-      console.log("Error", e);
-      return rejectWithValue(e.res.data);
+    const messages = "something went wrong";
+    if (res.status != 200) {
+      throw new Error(messages);
     }
+
+    return res.data.results;
+  } catch (e: any) {
+    console.log("Error", e);
+    return rejectWithValue(e.res.data);
   }
-);
+});
 
 export const getCredits = createAsyncThunk<
   { cast: castState[]; crew: string },

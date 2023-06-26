@@ -200,7 +200,7 @@ const Filter = () => {
       <section className="my-2">
         <div className="font-light">Genres</div>
         <div className="flex flex-wrap items-center gap-2 mt-2">
-          {genres?.map((item: { name: string }, idx: string) => (
+          {genres?.map((item, idx) => (
             <span
               className="px-4 py-1 rounded-2xl border cursor-pointer text-sm hover:bg-blue hover:text-white"
               key={`genres-${idx}`}

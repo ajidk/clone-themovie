@@ -37,7 +37,7 @@ const icons = [
   },
 ];
 
-function convertToRupiah(number: number): string {
+function convertToRupiah(number: number) {
   const rupiah = `${number?.toFixed(2)?.replace(/\d(?=(\d{3})+\.)/g, "$&,")}`;
   return rupiah;
 }
@@ -105,8 +105,6 @@ const Detail = () => {
     dispatch(getRecomendations({ movie_id: String(movie_id) }));
   });
 
-  const url = "https://image.tmdb.org/t/p/original";
-
   const duration = moment.duration(detailMovie?.runtime, "minutes");
   const hours = Math.floor(duration.asHours());
   const minutes = duration.minutes();
@@ -123,16 +121,14 @@ const Detail = () => {
             <section
               className={`border-b border-solid w-full relative  bg-cover bg-no-repeat bg-customLeft text-white`}
               style={{
-                backgroundImage: `url('${url.concat(
-                  detailMovie?.backdrop_path
-                )}')`,
+                backgroundImage: `url('https://image.tmdb.org/t/p/original${detailMovie?.backdrop_path}')`,
               }}
             >
               <div className="w-full mx-auto bg-customprimary">
                 <div className="container p-5 md:px-20 md:py-10 mx-auto max-w-[1440px] flex items-center flex-col md:flex-row gap-8">
                   <div>
                     <img
-                      src={url.concat(detailMovie?.poster_path)}
+                      src={`https://image.tmdb.org/t/p/original${detailMovie?.poster_path}`}
                       alt={detailMovie?.title}
                       className="min-w-[300px] h-[450px] rounded-lg"
                     />
@@ -149,16 +145,12 @@ const Detail = () => {
                         "MMMM DD, YYYY"
                       )}{" "}
                       <div className="w-1 h-1 rounded-full bg-white" />
-                      {detailMovie?.genres?.map(
-                        (item: { name: string }, idx: string | number) => (
-                          <span key={`genres-${idx}`}>
-                            {item.name}
-                            {idx === detailMovie?.genres?.length - 1
-                              ? ""
-                              : ", "}
-                          </span>
-                        )
-                      )}
+                      {detailMovie?.genres?.map((item, idx) => (
+                        <span key={`genres-${idx}`}>
+                          {item.name}
+                          {idx === detailMovie?.genres?.length - 1 ? "" : ", "}
+                        </span>
+                      ))}
                       <div className="w-1 h-1 rounded-full bg-white" />
                       {` ${hours}h ${minutes}m`}
                     </div>
@@ -287,11 +279,11 @@ const Detail = () => {
                 </div>
                 <div>
                   <h5 className="capitalize font-semibold">Budget</h5>
-                  <p>${convertToRupiah(detailMovie?.budget)}</p>
+                  <p>${convertToRupiah(Number(detailMovie?.budget))}</p>
                 </div>
                 <div>
                   <h5 className="capitalize font-semibold">Revenue</h5>
-                  <p>${convertToRupiah(detailMovie?.revenue)}</p>
+                  <p>${convertToRupiah(Number(detailMovie?.revenue))}</p>
                 </div>
                 <div>
                   <h5 className="capitalize font-semibold">Keywords</h5>

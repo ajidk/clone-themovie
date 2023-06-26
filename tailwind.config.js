@@ -21,9 +21,9 @@ export default {
     backgroundSize: {
       maxPrimaryPageWidth: "1300px",
     },
-    maxWidth: {
-      maxPrimaryPageWidth: "1300px",
-    },
+    // maxWidth: {
+    //   maxPrimaryPageWidth: "1300px",
+    // },
     extend: {
       spacing: {
         30: "30px",

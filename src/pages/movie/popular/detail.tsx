@@ -54,11 +54,14 @@ const Detail = () => {
           {reviews?.map((item, idx) => {
             if (idx === 1) {
               return (
-                <section className="flex gap-x-4 items-start" key={`review1-${idx}`}>
+                <section
+                  className="flex flex-col md:flex-row flex-wrap gap-4 items-center md:items-start"
+                  key={`review1-${idx}`}
+                >
                   <img
                     src={`https://www.themoviedb.org/t/p/w128_and_h128_face${item.author_details.avatar_path}`}
                     alt=""
-                    className="w-40 h-16 rounded-full object-cover border"
+                    className="w-16 h-16 rounded-full object-cover border"
                   />
 
                   <div>
@@ -72,7 +75,7 @@ const Detail = () => {
                         {moment(item.updated_at).format("MMMM YYYY")}
                       </p>
                     </div>
-                    <p className="text-sm font-normal mt-2">{item.content}</p>
+                    <p className="text-sm font-normal mt-2 line-clamp-5">{item.content}</p>
                   </div>
                 </section>
               );
@@ -127,7 +130,7 @@ const Detail = () => {
         }}
       >
         <div className="w-full mx-auto mt-5 bg-customprimary">
-          <div className="container px-20 py-10 mx-auto max-w-[1440px] flex gap-8">
+          <div className="container p-5 md:px-20 md:py-10 mx-auto max-w-[1440px] flex flex-col md:flex-row gap-8">
             <div>
               <img
                 src={url.concat(detailMovie?.poster_path)}
@@ -142,7 +145,7 @@ const Detail = () => {
                   ( {moment(detailMovie?.release_date).format("YYYY")} )
                 </span>
               </h3>
-              <div className="flex items-center gap-x-2 text-white font-light">
+              <div className="flex flex-wrap items-center gap-2 text-white font-light">
                 {moment(detailMovie?.release_date).format("MMMM DD, YYYY")}{" "}
                 <div className="w-1 h-1 rounded-full bg-white" />
                 {detailMovie?.genres?.map(
@@ -156,14 +159,14 @@ const Detail = () => {
                 <div className="w-1 h-1 rounded-full bg-white" />
                 {` ${hours}h ${minutes}m`}
               </div>
-              <div className="my-4 flex items-center gap-4">
+              <div className="my-4 flex flex-wrap items-center gap-4">
                 <ProgressCircle
                   vote_average={String(detailMovie?.vote_average?.toFixed(1))}
                 />
                 <div className="capitalize text-white">
                   <h4>user</h4> <h4>score</h4>
                 </div>
-                <div className="flex gap-x-5 ml-4 items-center">
+                <div className="flex flex-wrap gap-x-5 ml-4 items-center">
                   {icons.map((item, idx) => (
                     <div
                       className="bg-blue rounded-full p-4 flex justify-center items-center cursor-pointer"
@@ -187,7 +190,7 @@ const Detail = () => {
           </div>
         </div>
       </section>
-      <section className="px-20 py-8 mx-auto max-w-[1440px] gap-10 grid grid-cols-12">
+      <section className="p-5 md:px-20 md:py-8 mx-auto max-w-[1440px] gap-10 grid grid-cols-1 md:grid-cols-12">
         <div className="col-span-9">
           <h3 className="capitalize text-2xl font-semibold">top bill cast</h3>
           <div className="flex justify-start content-start items-center pb-5 gap-x-5">
@@ -273,7 +276,7 @@ const Detail = () => {
                     className="object-cover"
                   />
                   <div className="flex justify-between items-center mt-2">
-                    <h5>{item.title}</h5>
+                    <h5 className="truncate">{item.title}</h5>
                     <div>{parseFloat(item.vote_average).toFixed(1)}%</div>
                   </div>
                 </div>

@@ -41,8 +41,8 @@ const Popular = () => {
             <div className="md:pl-30 bg-transparent">
               <div className="w-full block py-30">
                 <div className="-mt-30">
-                  <div className="w-full flex justify-between flex-wrap">
-                    <div className="flex flex-wrap justify-between w-full">
+                  <div className="w-full flex justify-start md:justify-between flex-wrap">
+                    <div className="flex flex-wrap justify-start gap-4 md:justify-between w-full">
                       {popular?.results?.map(
                         (item: cardMovieState, idx: string) => (
                           <Link

@@ -34,7 +34,7 @@ const CardMovie: React.FC<cardMovieState> = ({
       />
       <div className="p-4 w-full">
         <div className="truncate font-semibold text-black">{title}</div>
-        <div className="font-light">{release_date}</div>
+        <div className="font-light truncate">{release_date}</div>
       </div>
 
       {vote_average && (

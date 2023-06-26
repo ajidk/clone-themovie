@@ -36,7 +36,7 @@ const icons = [
 ];
 
 function convertToRupiah(number: number): string {
-  const rupiah = `${number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`;
+  const rupiah = `${number?.toFixed(2)?.replace(/\d(?=(\d{3})+\.)/g, "$&,")}`;
   return rupiah;
 }
 
@@ -54,7 +54,7 @@ const Detail = () => {
           {reviews?.map((item, idx) => {
             if (idx === 1) {
               return (
-                <section className="flex gap-x-4 items-start">
+                <section className="flex gap-x-4 items-start" key={`review1-${idx}`}>
                   <img
                     src={`https://www.themoviedb.org/t/p/w128_and_h128_face${item.author_details.avatar_path}`}
                     alt=""
@@ -158,7 +158,7 @@ const Detail = () => {
               </div>
               <div className="my-4 flex items-center gap-4">
                 <ProgressCircle
-                  vote_average={String(detailMovie?.vote_average.toFixed(1))}
+                  vote_average={String(detailMovie?.vote_average?.toFixed(1))}
                 />
                 <div className="capitalize text-white">
                   <h4>user</h4> <h4>score</h4>
